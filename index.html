@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Hypertrophy</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Lift">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f6f4">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111110">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+  <link rel="icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="top"><h1>Hypertrophy</h1></header>
+  <main id="view" aria-live="polite"></main>
+
+  <div id="timer" class="timer" hidden>
+    <span id="timer-text"></span>
+    <button data-action="timer-add">+30s</button>
+    <button data-action="timer-skip">Skip</button>
+  </div>
+
+  <nav class="tabbar" aria-label="Sections">
+    <button data-tab="today" aria-current="page">Today</button>
+    <button data-tab="history" aria-current="false">History</button>
+    <button data-tab="volume" aria-current="false">Volume</button>
+    <button data-tab="plan" aria-current="false">Plan</button>
+    <button data-tab="settings" aria-current="false">Settings</button>
+  </nav>
+
+  <dialog id="setdlg">
+    <form method="dialog">
+      <h3>Edit set</h3>
+      <label>Weight <input name="weight" inputmode="decimal"></label>
+      <label>Reps <input name="reps" inputmode="numeric"></label>
+      <label>Reps in reserve
+        <select name="rir">
+          <option value="">not logged</option>
+          <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4+</option>
+        </select>
+      </label>
+      <menu>
+        <button class="btn ghost" value="cancel" formnovalidate>Cancel</button>
+        <button class="btn primary" value="save">Save</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <dialog id="exdlg">
+    <form method="dialog">
+      <h3 id="exdlg-title">Exercise</h3>
+      <input type="hidden" name="id">
+      <label>Name <input name="name" required autocomplete="off"></label>
+      <label>Load type
+        <select name="kind">
+          <option value="weighted">Weighted: log the bar or plate weight</option>
+          <option value="bodyweight">Bodyweight: log added weight</option>
+        </select>
+      </label>
+      <div class="row">
+        <label>Rep floor <input name="lo" inputmode="numeric" required></label>
+        <label>Rep ceiling <input name="hi" inputmode="numeric" required></label>
+      </div>
+      <label>Load jump
+        <select name="jump"><option value="upper">Upper-body jump</option><option value="lower">Lower-body jump</option></select>
+      </label>
+      <label>Rest
+        <select name="rest"><option value="main">Full rest</option><option value="pair">Short rest (superset)</option></select>
+      </label>
+      <p class="sub">Primary muscles, count 1 hard set each</p>
+      <div class="muscles" id="ex-primary"></div>
+      <p class="sub">Secondary, count half</p>
+      <div class="muscles" id="ex-secondary"></div>
+      <menu>
+        <button class="link danger" value="delete" formnovalidate>Delete</button>
+        <button class="btn ghost" value="cancel" formnovalidate>Cancel</button>
+        <button class="btn primary" value="save">Save</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
